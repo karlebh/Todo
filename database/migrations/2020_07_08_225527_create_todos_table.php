@@ -16,11 +16,13 @@ class CreateTodosTable extends Migration
         Schema::create('todos', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('message');
-            $table->string('details')->nullable();
+            $table->string('slug');
+            $table->text('message');
+            $table->text('details')->nullable();
             $table->string('image')->nullable();
-            $table->date('date');
             $table->timestamps();
+
+            $table->unique(['name', 'slug']);
         });
     }
 

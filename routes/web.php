@@ -15,10 +15,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', 'TodoController@index')->name('home');
 
+Route::resource('todo', 'TodoController');
+Route::get('search', 'SearchController@search')->name('todo.search');
 
-Route::get('todo', 'TodoController@index');
-Route::post('todo', 'TodoController@store');
-Route::patch('todo/{todo}', 'TodoController@update');
-Route::post('todo/{todo}', 'TodoController@delete');
-Route::get('search', 'TodoController@search');
+// Route::get('todo', 'TodoController@index')->name('index');
+// Route::get('todo/create', 'TodoController@create');
+// Route::post('todo', 'TodoController@store');
+// Route::patch('todo/{todo}', 'TodoController@update');
+// Route::post('todo/{todo}', 'TodoController@delete');
 

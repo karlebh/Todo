@@ -6,11 +6,14 @@ use App\Todo;
 use Faker\Generator as Faker;
 
 $factory->define(Todo::class, function (Faker $faker) {
+
+	$name = $faker->name;
+
     return [
-        'name' => $faker->name,
+        'name' => $name,
+        'slug' => Str::limit(Str::slug($name)),
         'message' => $faker->paragraph,
-        'details' => $faker->paragraph,
+        'details' => $faker->text,
         'image' => $faker->image,
-        'date' => now(),
     ];
 });
