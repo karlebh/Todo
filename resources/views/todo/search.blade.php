@@ -2,10 +2,12 @@
 
 @section('content')
 
-<div>
-	hello There!
+@if($result->count())
+<div class="flex items-center justify-center bg-gray-400 mx-10 my-4 bg-gray-400 p-4">
+	<p> Search Results for    <b> {{ $query }}</b> </p>
 </div>
-{{-- 	
+@endif
+
 	<section>
 
 		@forelse($result as $todo)
@@ -16,16 +18,12 @@
 			<p class="py-5">{{ $todo->message }}</p>
 
 			<hr>
-			<p class="py-5">{{ $todo->details ?? ''}}</p>
+			@if($todo->details)
+			<p class="py-5">{{ $todo->details}}</p>
 			<hr>
+			@endif
 			<div>
-				
-				@if($todo->image)
-				<img src="/storage/{{ $todo->image }}" alt="Todo Image"
-				class="object-cover w-40 h-40 align-middle" 
-				>
-				@endif
-
+			
 			</div>
 
 			<p class="my-4"> <i> Created: </i>{{ $todo->created_at->diffForHumans() }}</p>
@@ -51,14 +49,17 @@
 
 			</div>
 		</div>
-		@empty <p class="text-center">No Todo Available</p>
+		@empty 
+		<div class="flex items-center justify-center bg-gray-400 mx-10 my-4 bg-gray-400 p-4">
+			<p>No Todo by the name <b>{{ $query }}</b></p>
+		</div>
 
 		@endforelse
 	</section>
 
 	<div class="mx-10 my-20 bg-gray-400">
 
-	{{ $result->links() }}
+	{{ $result->appends(request()->query())->links() }}
 		
 	</div>
- --}}@endsection
+ @endsection

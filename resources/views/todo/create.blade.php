@@ -59,7 +59,7 @@
                         <div class="flex flex-wrap mb-6">
                             {{-- details --}}
                             <label for="details" class="block text-gray-700 text-sm font-bold mb-2">
-                                {{ __('Details') }}:
+                                {{ __('Details (Optional)') }}:
                             </label>
 
                             <textarea id="details" rows="10" 
@@ -72,24 +72,6 @@
                                     {{ $message }}
                                 </p>
                             @enderror
-                        </div>
-
-                        <div class="flex flex-wrap mb-6">
-                            {{-- image --}}
-                             <label for="image" class="block text-gray-700 text-sm font-bold mb-2">
-                                {{ __('Image') }}:
-                            </label>
-
-                            <input id="image" type="file" accept="image/*" 
-                            class="form-input w-full mb-4 @error('image')  border-red-500 @enderror" name="image" 
-                            value="{{ old('image') }}">
-
-                            @error('image')
-                                <p class="text-red-500 text-xs italic mt-4">
-                                    {{ $message }}
-                                </p>
-                            @enderror
-                            
                         </div>
 
                         <div class="flex flex-wrap">

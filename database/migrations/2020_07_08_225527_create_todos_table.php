@@ -19,8 +19,8 @@ class CreateTodosTable extends Migration
             $table->string('slug');
             $table->text('message');
             $table->text('details')->nullable();
-            $table->string('image')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->unique(['name', 'slug']);
         });

@@ -17,8 +17,8 @@ Route::get('/', 'TodoController@index')->name('home');
 
 Route::resource('todo', 'TodoController');
 Route::get('search', 'SearchController@search')->name('todo.search');
+Route::get('restore', 'TodoController@restoreTodo')->name('restore');
 
-// Route::get('todo', 'TodoController@index')->name('index');
 // Route::get('todo/create', 'TodoController@create');
 // Route::post('todo', 'TodoController@store');
 // Route::patch('todo/{todo}', 'TodoController@update');

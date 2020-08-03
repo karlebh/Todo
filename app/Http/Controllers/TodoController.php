@@ -122,4 +122,11 @@ class TodoController extends Controller
 
         return redirect()->route('todo.index')->withMessage('Todo Deleted Successfully');
     }
+
+    public function restoreTodo()
+    {
+        Todo::withTrashed()->restore();
+
+        return back();
+    }
 }

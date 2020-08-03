@@ -9,16 +9,10 @@ class SearchController extends Controller
 {
    	public function search(Todo $todo, Request $request)
     {
+        $query = $request->todo;
 
-        // $request->validate([
-        //         'q' => 'string|min:3',
-        //     ]);
-
-        // $query = $request->q;
-
-        // $result = Todo::whereName('like', '%$query%')->simplePaginate();
-
-        return view('todo.search');
-        // ->withResult(Todo::paginate());
+        $result = Todo::where('name', 'like', "%$query%")->simplePaginate();
+    
+        return view('todo.search', compact('result', 'query'));
     }
 }

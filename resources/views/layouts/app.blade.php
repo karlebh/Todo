@@ -52,11 +52,11 @@
 
                 <div class="">
                     <h4 class="mx-auto w-64 text-white text-center font-semibold">
-                        Todo Inc. &copy 
-                        <span id="date"></span>
+                        Todo Inc. &copy {{ Date('Y') }}
+                        {{-- <span id="date"></span>
                         <script>
                             document.getElementById('date').innerHTML = new Date().getFullYear();
-                        </script>
+                        </script> --}}
                     </h4>
 
                 </div>

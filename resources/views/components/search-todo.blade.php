@@ -6,8 +6,8 @@
             method="get" 
             action="{{ route('todo.search') }}" 
         >
-            <input id="q" type="text" class="form-input md:w-64" name="name" 
-             required autocomplete="name" autofocus>
+            <input id="q" type="text" class="form-input md:w-64" name="todo" 
+             required autocomplete="todo" autofocus placeholder="Search Todo by Name">
 
 
             <button type="submit" class="inline-block align-middle text-center select-none border font-bold whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-blue-900 hover:bg-white hover:text-blue-900">

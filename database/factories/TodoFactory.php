@@ -14,6 +14,5 @@ $factory->define(Todo::class, function (Faker $faker) {
         'slug' => Str::limit(Str::slug($name)),
         'message' => $faker->paragraph,
         'details' => $faker->text,
-        'image' => $faker->image,
     ];
 });

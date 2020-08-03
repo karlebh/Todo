@@ -14,15 +14,13 @@
 			<p class="py-5">{{ $todo->message }}</p>
 
 			<hr>
-			<p class="py-5">{{ $todo->details ?? ''}}</p>
+			@if($todo->details)
+			<p class="py-5">{{ $todo->details}}</p>
 			<hr>
+			@endif
 			<div>
 				
-				@if($todo->image)
-				<img src="/storage/{{ $todo->image }}" alt="Todo Image"
-				class="object-cover w-40 h-40 align-middle" 
-				>
-				@endif
+			
 
 			</div>
 
@@ -59,4 +57,12 @@
 	{{ $todos->links() }}
 		
 	</div>
+
+
+	<div class="mx-10 mt-6 mb-4 bg-gray-400 p-4 text-center">
+		<a href="{{ route('restore') }}" class="inline-block align-middle text-center select-none border font-bold whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-blue-900 hover:bg-white hover:text-blue-900">
+			Restore Deleted Todos
+		</a>
+	</div>
+
 @endsection
