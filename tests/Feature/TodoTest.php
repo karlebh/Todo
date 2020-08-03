@@ -19,66 +19,54 @@ class TodoTest extends TestCase
         $this->withoutExceptionHandling();
 
         $this->post('/todo', 
-            // factory(Todo::class)->create()->toArray()
-             [
-                    'name' => 'Caleb Akeju',
-                    'message' => 'Lorem ipsum dolor sit.',
-                    'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum, cupiditate!',
-                    'image' => 'images/image.jpg',
-                    'date' => '2020-07-09',
-             ]
+            factory(Todo::class)->make()->toArray()
 
-        )->assertRedirect('index'); 
+        )->assertRedirect('todo'); 
         $this->assertCount(1, Todo::all());
     }
 
-    // /** @test */
-    // public function image_and_details_fields_are_not_required()
-    // {
-    //     $this->post('todo', [
-    //                 'name' => 'Caleb Akeju',
-    //                 'message' => 'Lorem ipsum dolor sit.',
-    //                 'details' => '',
-    //                 'image' => '',
-    //                 'date' => '2020-07-09',
-    //          ])->assertOk();
+     /** @test */
+    public function details_fields_is_not_required()
+    {
+        $this->post('todo', [
+                    'name' => 'Caleb Akeju',
+                    'message' => 'Lorem ipsum dolor sit.',
+                    'details' => '',
+             ])->assertRedirect('todo');
 
-    //     $this->assertCount(1, Todo::all());
-    // }
+        $this->assertCount(1, Todo::all());
+    }
 
-    // /** @test */
-    // public function todo_can_be_updated()
-    // {
-    //     $todo = factory(Todo::class)->create();
+     /** @test */
+    public function todo_can_be_updated()
+    {
+        $todo = factory(Todo::class)->create();
 
-    //     $this->patch('todo/' . $todo->id, [
-    //             'message' => 'Lorem ipsum dolor sit am.',
-    //             'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-    //                           Commodi error, eaque!'
-    //         ])->asssertOK();
-    //     $this->assertCount(2, Todo::all());
-    // }
+        $this->patch('todo/' . $todo->slug, [
+                'message' => 'Lorem ipsum dolor sit am.',
+                'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
+                              Commodi error, eaque!'
+            ])->assertStatus(302)->assertOk();
 
-    // /** @test */
-    // public function todo_can_be_deleted()
-    // {
-    //     $todo = $this->post('todo', [
-    //             'message' => 'Lorem ipsum dolor sit am.',
-    //             'details' => 'Lorem ipsum dolor sit amet, consectetur adipisicing elit. 
-    //                           Commodi error, eaque!'
-    //         ]);
-    //     $this->assertCount(1, Todo::all());
+        $this->assertCount(2, Todo::all());
+    }
 
-    //     $this->delete('todo/' . $todo->id)->asssertOK();
-    //     $this->assertCount(0, Todo::all());
-    // }
+     /** @test */
+    public function todo_can_be_deleted()
+    {
+        $todo = $this->post('todo', factory(Todo::class)->make()->toArray());
+        $this->assertCount(1, Todo::all());
 
-    // /** @test */
-    // public function todo_can_be_searched()
-    // {
-    //     $todo = factory(Todo::class)->create(['name' => 'gym']);
+        $this->delete('todo/' . $todo->slug)->assertStatus(302)->asssertOK();
+        $this->assertCount(0, Todo::all());
+    }
 
-    //     $response = $this->post('search?q=gym')->assertOk();
-    // }
+    /** @test */
+    public function todo_can_be_searched()
+    {
+        $todo = factory(Todo::class)->create(['name' => 'gym']);
+
+        $response = $this->post('search?todo=gym')->assertStatus(302)->asssertOK();
+    }
 
 }
