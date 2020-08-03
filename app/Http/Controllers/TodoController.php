@@ -11,6 +11,7 @@ class TodoController extends Controller
  
     public function index()
     {
+
     	return view('todo.index')->withTodos(
             Todo::orderBy('created_at', 'desc')->simplePaginate()
         );
@@ -31,16 +32,6 @@ class TodoController extends Controller
     		'image' => 'image|nullable',
     	]);
 
-        //store picture in \public\images directory
-
-    	if($request->image)
-    	{
-    		$imgPath = $request->image->store('images', 'public');
-
-            //store image path for database insertion
-
-    		$imgArray = ['image' => $imgPath];
-    	}
 
         //sake the slug
 
@@ -51,7 +42,6 @@ class TodoController extends Controller
     	$all = array_filter(
     		array_merge(
     			$data, 
-                $imgArray ?? [],
                 $slugArray,
     		)
     	);
@@ -68,19 +58,7 @@ class TodoController extends Controller
     		'name' => 'required|string|min:4|max:300',
     		'message' => 'required|string|min:5|max:2000',
     		'details' => 'string|nullable',
-    		'image' => 'image|nullable',
     	]);
-
-
-        //store picture in \public\images directory
-    	if($request->image)
-    	{
-    		$imgPath = $request->image->store('images', 'public');
-
-            //store image path for database insertion
-
-    		$imgArray = ['image' => $imgPath];
-    	}
 
         //slug array
 
@@ -91,7 +69,6 @@ class TodoController extends Controller
         $all = array_filter(
             array_merge(
                 $data, 
-                $imgArray ?? [],
                 $slugArray,
             )
         );

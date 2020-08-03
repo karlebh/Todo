@@ -58,7 +58,7 @@
 		
 	</div>
 
-
+	
 	<div class="mx-10 mt-6 mb-4 bg-gray-400 p-4 text-center">
 		<a href="{{ route('restore') }}" class="inline-block align-middle text-center select-none border font-bold whitespace-no-wrap py-2 px-4 rounded text-base leading-normal no-underline text-gray-100 bg-blue-900 hover:bg-white hover:text-blue-900">
 			Restore Deleted Todos
